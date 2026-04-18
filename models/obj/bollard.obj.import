@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://r5s7u2t01x5e"
+path="res://.godot/imported/bollard.obj-e7f8729ce256667baeb23362b6cdb27a.mesh"
+
+[deps]
+
+files=["res://.godot/imported/bollard.obj-e7f8729ce256667baeb23362b6cdb27a.mesh"]
+
+source_file="res://models/obj/bollard.obj"
+dest_files=["res://.godot/imported/bollard.obj-e7f8729ce256667baeb23362b6cdb27a.mesh", "res://.godot/imported/bollard.obj-e7f8729ce256667baeb23362b6cdb27a.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

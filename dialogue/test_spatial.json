@@ -1,0 +1,12 @@
+{
+	"level": "test_spatial",
+	"MonitorCollider": {
+		"-1": "START",
+		"0": "Do you want to use the computer?|l|0|Yes.|os_login|y|0|No.|?"
+	},
+	"Arlo": {
+		"-1": "START",
+		"0": "Hi.|n|1|Hello.|?|y|0|*|?",
+		"1": "Bye.|y|1|See ya!|?|y|1|*|?"
+	}
+}

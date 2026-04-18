@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cjk2cd6gsowbv"
+path="res://.godot/imported/desktop_tower.obj-d9bcee74d120ed7fd77393a607cc8de8.mesh"
+
+[deps]
+
+files=["res://.godot/imported/desktop_tower.obj-d9bcee74d120ed7fd77393a607cc8de8.mesh"]
+
+source_file="res://models/obj/desktop_tower.obj"
+dest_files=["res://.godot/imported/desktop_tower.obj-d9bcee74d120ed7fd77393a607cc8de8.mesh", "res://.godot/imported/desktop_tower.obj-d9bcee74d120ed7fd77393a607cc8de8.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

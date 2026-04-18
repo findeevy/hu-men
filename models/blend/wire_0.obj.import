@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://poe1tysyr6rq"
+path="res://.godot/imported/wire_0.obj-5fcccb0df90376eaa05731183b81679d.mesh"
+
+[deps]
+
+files=["res://.godot/imported/wire_0.obj-5fcccb0df90376eaa05731183b81679d.mesh"]
+
+source_file="res://models/blend/wire_0.obj"
+dest_files=["res://.godot/imported/wire_0.obj-5fcccb0df90376eaa05731183b81679d.mesh", "res://.godot/imported/wire_0.obj-5fcccb0df90376eaa05731183b81679d.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
