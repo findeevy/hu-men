@@ -39,7 +39,7 @@ project/assembly_name="Project Wired"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/qodot/plugin.cfg")
+enabled=PackedStringArray()
 
 [filesystem]
 

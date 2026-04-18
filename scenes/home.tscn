@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://bq2ydtax73j7"]
 
-[ext_resource type="Script" uid="uid://dnnlngsfl2lyl" path="res://scripts/intro/intro_wiggle_check.gd" id="1_rpgsi"]
 [ext_resource type="Texture2D" uid="uid://rthkir7cyb6j" path="res://textures/ui/wall.png" id="2_gi00y"]
 [ext_resource type="Shader" uid="uid://dm4i3vxudxtww" path="res://shaders/wavy2d.gdshader" id="3_o7pnx"]
 [ext_resource type="Texture2D" uid="uid://dcn5fjxny7tet" path="res://textures/ui/ui_flesh_0r.png" id="4_aish6"]
@@ -9,9 +8,22 @@
 [ext_resource type="Texture2D" uid="uid://cr4c20asb8a6u" path="res://textures/ui/ui_flesh_2r.png" id="8_kc6b6"]
 [ext_resource type="Texture2D" uid="uid://bosb0ymx1yasr" path="res://textures/ui/ui_flesh_1l.png" id="9_jdxxw"]
 [ext_resource type="Texture2D" uid="uid://ds4bkflsqkxip" path="res://textures/ui/ui_flesh_1r.png" id="10_6k6s7"]
+[ext_resource type="Script" uid="uid://dji203p7kr6fo" path="res://scripts/humen.gd" id="10_rpgsi"]
 [ext_resource type="Theme" uid="uid://b074exqrung1g" path="res://themes/os_theme.tres" id="11_rqor2"]
-[ext_resource type="Script" uid="uid://dgi5pnfgod81g" path="res://scripts/intro/intro_label_flash.gd" id="12_qmde4"]
+[ext_resource type="Texture2D" uid="uid://duhlbtyaxhrhc" path="res://textures/body/armleg.png" id="13_o7pnx"]
+[ext_resource type="Texture2D" uid="uid://u3l0xks0opcp" path="res://textures/body/body.png" id="14_aish6"]
+[ext_resource type="Texture2D" uid="uid://d30tem2yos7sl" path="res://textures/body/closedmouth.png" id="14_snnha"]
+[ext_resource type="Script" uid="uid://c03bvuq53cwei" path="res://scripts/eyehole.gd" id="15_ju5sp"]
 [ext_resource type="Shader" uid="uid://d6pypakeik2h" path="res://shaders/camera_floyd.gdshader" id="15_miq5y"]
+[ext_resource type="Texture2D" uid="uid://b17x6jxirdlkc" path="res://textures/body/head.png" id="15_snnha"]
+[ext_resource type="Texture2D" uid="uid://cobv7e3fo8gn2" path="res://textures/body/eyeskin.png" id="16_e42qu"]
+[ext_resource type="Script" uid="uid://cp4t1nciuhf53" path="res://scripts/leg.gd" id="17_o7pnx"]
+[ext_resource type="Texture2D" uid="uid://jmora8vxe5pv" path="res://textures/body/eyehole.png" id="17_ppa51"]
+[ext_resource type="Texture2D" uid="uid://7dmux6pu16ob" path="res://textures/ui/speechdot.png" id="19_6k6s7"]
+[ext_resource type="Texture2D" uid="uid://cong4haw4m0ft" path="res://textures/home/nightoverlay.png" id="19_snnha"]
+[ext_resource type="Texture2D" uid="uid://bmn4uyu4avyr" path="res://textures/ui/godhand.png" id="20_e42qu"]
+[ext_resource type="Script" uid="uid://d2vlqcudmplib" path="res://scripts/godhand.gd" id="21_ppa51"]
+[ext_resource type="Texture2D" uid="uid://bnbxt8rg68wg0" path="res://textures/ui/speech_bubble.png" id="22_kc6b6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5m3h6"]
 shader = ExtResource("3_o7pnx")
@@ -113,68 +125,66 @@ shader_parameter/color_levels = 8
 shader_parameter/dither_scale = 1.0
 shader_parameter/intensity = 0.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_6k6s7"]
+radius = 37.93
+
 [node name="Node2D" type="Node2D" unique_id=1051605538]
-script = ExtResource("1_rpgsi")
 
 [node name="Wall" type="Sprite2D" parent="." unique_id=633169718]
-position = Vector2(0, -204)
+z_index = -10
+z_as_relative = false
+position = Vector2(0, -153)
 texture = ExtResource("2_gi00y")
 centered = false
 
 [node name="UiFleshFrame0r" type="Sprite2D" parent="." unique_id=1701077042]
+z_index = 10
 material = SubResource("ShaderMaterial_5m3h6")
 position = Vector2(681.00006, 294.00003)
 rotation = -0.237365
 texture = ExtResource("4_aish6")
 
 [node name="UiFlesh1l" type="Sprite2D" parent="." unique_id=1296404224]
+z_index = 10
 material = SubResource("ShaderMaterial_ld15c")
 position = Vector2(358, 523)
 rotation = -1.5708
 texture = ExtResource("7_ppa51")
 
 [node name="UiFlesh1r" type="Sprite2D" parent="." unique_id=1640825819]
+z_index = 10
 material = SubResource("ShaderMaterial_0viod")
 position = Vector2(384, 108)
 rotation = -1.5708
 texture = ExtResource("8_kc6b6")
 
 [node name="UiFlesh2l" type="Sprite2D" parent="." unique_id=2083986188]
+z_index = 10
 material = SubResource("ShaderMaterial_jljx3")
 position = Vector2(48.99998, 271.00003)
 rotation = 0.0959931
 texture = ExtResource("9_jdxxw")
 
 [node name="UiFleshFrame0l" type="Sprite2D" parent="." unique_id=2101449461]
+z_index = 10
 material = SubResource("ShaderMaterial_gd8l3")
 position = Vector2(90, 64)
 rotation = 0.7382742
 texture = ExtResource("6_e42qu")
 
 [node name="UiFlesh2r" type="Sprite2D" parent="." unique_id=1818722124]
+z_index = 10
 material = SubResource("ShaderMaterial_bgtlw")
 position = Vector2(651.99994, 262.99994)
 rotation = 0.0959931
 texture = ExtResource("10_6k6s7")
 
 [node name="UiFlesh2r2" type="Sprite2D" parent="." unique_id=1019953827]
+z_index = 10
 material = SubResource("ShaderMaterial_bgtlw")
 position = Vector2(63.999985, 417)
 rotation = 2.5359633
 texture = ExtResource("10_6k6s7")
-
-[node name="Label" type="Label" parent="." unique_id=1376221764]
-visible = false
-offset_right = 713.0
-offset_bottom = 538.0
-theme = ExtResource("11_rqor2")
-theme_override_font_sizes/font_size = 240
-text = "ENACT
-YOUR
-WILL"
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("12_qmde4")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=370934034]
 follow_viewport_enabled = true
@@ -197,3 +207,120 @@ metadata/_edit_use_anchors_ = true
 
 [node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=917583079]
 current = true
+
+[node name="humen" type="Node2D" parent="." unique_id=359190]
+z_as_relative = false
+position = Vector2(320, 469)
+script = ExtResource("10_rpgsi")
+
+[node name="Body" type="Sprite2D" parent="humen" unique_id=1575299142]
+z_index = 1
+z_as_relative = false
+position = Vector2(-4, -75)
+texture = ExtResource("14_aish6")
+script = ExtResource("17_o7pnx")
+max_angle_degrees = 4.0
+rotation_speed = 2.0
+
+[node name="HumanHead" type="Area2D" parent="humen/Body" unique_id=1812168410]
+z_index = 10
+z_as_relative = false
+position = Vector2(0, -68)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="humen/Body/HumanHead" unique_id=979900600]
+shape = SubResource("CircleShape2D_6k6s7")
+
+[node name="Head" type="Sprite2D" parent="humen/Body" unique_id=593457419]
+position = Vector2(0, -68)
+texture = ExtResource("15_snnha")
+
+[node name="Closedmouth" type="Sprite2D" parent="humen/Body/Head" unique_id=266324879]
+position = Vector2(0, 6)
+texture = ExtResource("14_snnha")
+
+[node name="RightEyeskin" type="Sprite2D" parent="humen/Body/Head" unique_id=447512598]
+position = Vector2(24, -13)
+texture = ExtResource("16_e42qu")
+
+[node name="Eyehole" type="Sprite2D" parent="humen/Body/Head/RightEyeskin" unique_id=2124582329]
+texture = ExtResource("17_ppa51")
+script = ExtResource("15_ju5sp")
+
+[node name="LeftEyeskin" type="Sprite2D" parent="humen/Body/Head" unique_id=1643031913]
+position = Vector2(-23, -13)
+texture = ExtResource("16_e42qu")
+
+[node name="Eyehole2" type="Sprite2D" parent="humen/Body/Head/LeftEyeskin" unique_id=2042034243]
+texture = ExtResource("17_ppa51")
+script = ExtResource("15_ju5sp")
+
+[node name="RightLeg" type="Sprite2D" parent="humen" unique_id=1437004128]
+position = Vector2(20, -44)
+texture = ExtResource("13_o7pnx")
+centered = false
+offset = Vector2(-10, -10)
+script = ExtResource("17_o7pnx")
+rotation_speed = 5.0
+
+[node name="LeftLeg" type="Sprite2D" parent="humen" unique_id=815430473]
+position = Vector2(-24, -51)
+texture = ExtResource("13_o7pnx")
+centered = false
+offset = Vector2(-8.87, -3.36)
+script = ExtResource("17_o7pnx")
+rotation_speed = 4.6
+
+[node name="RightArm" type="Sprite2D" parent="humen" unique_id=1600705824]
+position = Vector2(43.999992, -117.000046)
+rotation = 0.9302605
+texture = ExtResource("13_o7pnx")
+
+[node name="LeftArm" type="Sprite2D" parent="humen" unique_id=201881520]
+position = Vector2(-47, -118)
+rotation = -0.78016216
+texture = ExtResource("13_o7pnx")
+
+[node name="Speechdot2" type="Sprite2D" parent="humen" unique_id=1228719385]
+z_index = 7
+z_as_relative = false
+position = Vector2(-3, -184)
+texture = ExtResource("19_6k6s7")
+
+[node name="Speechdot" type="Sprite2D" parent="humen/Speechdot2" unique_id=1493469833]
+z_index = 7
+z_as_relative = false
+position = Vector2(12, -11)
+texture = ExtResource("19_6k6s7")
+
+[node name="SpeechBubble" type="Sprite2D" parent="humen/Speechdot2/Speechdot" unique_id=1598024207]
+z_index = 7
+z_as_relative = false
+position = Vector2(82, -41)
+texture = ExtResource("22_kc6b6")
+
+[node name="Label" type="Label" parent="humen/Speechdot2/Speechdot/SpeechBubble" unique_id=945325041]
+z_index = 7
+z_as_relative = false
+offset_left = -73.0
+offset_top = -36.0
+offset_right = 77.0
+offset_bottom = 34.0
+theme = ExtResource("11_rqor2")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "we love joe biden we love vaccines we love the antichrist oh yeah we are democrats yep yep! Penis for everyone!"
+autowrap_mode = 2
+
+[node name="Nightoverlay" type="Sprite2D" parent="." unique_id=845201993]
+visible = false
+z_index = 9
+z_as_relative = false
+position = Vector2(348, 257)
+texture = ExtResource("19_snnha")
+
+[node name="Godhand" type="Sprite2D" parent="." unique_id=1242562243]
+z_index = 9
+position = Vector2(445, 267)
+texture = ExtResource("20_e42qu")
+centered = false
+offset = Vector2(-34, -50)
+script = ExtResource("21_ppa51")
