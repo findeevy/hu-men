@@ -4,6 +4,8 @@ var timer = 1.0
 
 @export var bounds_min := Vector2(60, 300)
 @export var bounds_max := Vector2(660, 520)
+func _ready() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 func _physics_process(delta: float) -> void:
 	if Controller.grabbed == "HumanHead":

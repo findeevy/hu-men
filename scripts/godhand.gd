@@ -22,10 +22,21 @@ func get_node_under_mouse():
 
 	var results = space_state.intersect_point(query)
 	
-	if results.size() > 0:
-		var collider = results[0].collider
+	var top_collider = null
+	var top_z = -INF
+
+	for r in results:
+		var c = r.collider
+		if c is CanvasItem:
+			print(str(c.z_index) +":")
+			print(c.name)
+			if c.z_index > top_z:
+				top_z = c.z_index
+				top_collider = c
+
+	if top_collider:
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-			Controller.grabbed = collider.name
+			Controller.grabbed = top_collider.name
 			texture = godpinchl
 		else:
 			Controller.grabbed = ""
