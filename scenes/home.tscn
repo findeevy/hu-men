@@ -24,6 +24,8 @@
 [ext_resource type="Texture2D" uid="uid://bmn4uyu4avyr" path="res://textures/ui/godhand.png" id="20_e42qu"]
 [ext_resource type="Script" uid="uid://d2vlqcudmplib" path="res://scripts/godhand.gd" id="21_ppa51"]
 [ext_resource type="Texture2D" uid="uid://bnbxt8rg68wg0" path="res://textures/ui/speech_bubble.png" id="22_kc6b6"]
+[ext_resource type="Texture2D" uid="uid://cspx77tdo87xt" path="res://textures/ui/ui_flesh_wall.png" id="25_rqor2"]
+[ext_resource type="Script" uid="uid://dol80q3egruic" path="res://scripts/ui_flesh_wall.gd" id="26_qmde4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5m3h6"]
 shader = ExtResource("3_o7pnx")
@@ -128,6 +130,16 @@ shader_parameter/intensity = 0.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_6k6s7"]
 radius = 37.93
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qmde4"]
+shader = ExtResource("3_o7pnx")
+shader_parameter/sway_amount = 10.0
+shader_parameter/frequency = 4.0
+shader_parameter/speed = 7.195
+shader_parameter/vertical_intensity = 1.2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rqor2"]
+size = Vector2(39, 514.5)
+
 [node name="Node2D" type="Node2D" unique_id=1051605538]
 
 [node name="Wall" type="Sprite2D" parent="." unique_id=633169718]
@@ -195,12 +207,9 @@ material = SubResource("ShaderMaterial_j7q7u")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -4.0
-offset_top = 3.0
-offset_right = -4.0
-offset_bottom = 3.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(2.3200002, 1)
 size_flags_horizontal = 3
 size_flags_vertical = 3
 metadata/_edit_use_anchors_ = true
@@ -318,9 +327,24 @@ position = Vector2(348, 257)
 texture = ExtResource("19_snnha")
 
 [node name="Godhand" type="Sprite2D" parent="." unique_id=1242562243]
-z_index = 9
+z_index = 13
 position = Vector2(445, 267)
 texture = ExtResource("20_e42qu")
 centered = false
 offset = Vector2(-34, -50)
 script = ExtResource("21_ppa51")
+
+[node name="UiFleshWall" type="Sprite2D" parent="." unique_id=173569844]
+z_index = 12
+z_as_relative = false
+material = SubResource("ShaderMaterial_qmde4")
+position = Vector2(9, 0)
+texture = ExtResource("25_rqor2")
+centered = false
+script = ExtResource("26_qmde4")
+
+[node name="FleshWalls" type="Area2D" parent="UiFleshWall" unique_id=1755496589]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UiFleshWall/FleshWalls" unique_id=2002139658]
+position = Vector2(64, 262.75)
+shape = SubResource("RectangleShape2D_rqor2")

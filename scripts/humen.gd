@@ -6,10 +6,6 @@ var timer = 1.0
 @export var bounds_max := Vector2(660, 520)
 
 func _physics_process(delta: float) -> void:
-
-	# -------------------------
-	# GRABBED: follow mouse
-	# -------------------------
 	if Controller.grabbed == "HumanHead":
 		var mouse_pos = get_global_mouse_position()
 		
@@ -20,10 +16,7 @@ func _physics_process(delta: float) -> void:
 		position.y = clamp(position.y, bounds_min.y, bounds_max.y)
 		
 		return
-
-	# -------------------------
-	# WANDER MODE
-	# -------------------------
+		
 	if Controller.hu_type == "wander":
 
 		if Controller.hu_mode == "right":

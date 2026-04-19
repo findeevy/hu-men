@@ -31,6 +31,7 @@ func get_node_under_mouse():
 			Controller.grabbed = ""
 			texture = godhandl
 	else:
+		Controller.grabbed = ""
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 			texture = godpinch
 		else:
