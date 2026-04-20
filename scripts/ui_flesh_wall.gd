@@ -9,12 +9,13 @@ var drag_offset := 0.0
 var dragging := false
 
 func _ready():
+	add_to_group("grabbable")
 	origin_x = position.x
 	snap_target = origin_x
 
 
 func _physics_process(delta: float) -> void:
-	if Controller.grabbed == "FleshWalls":
+	if Controller.grabbed == self:
 		if !dragging:
 			dragging = true
 			drag_offset = position.x - get_global_mouse_position().x

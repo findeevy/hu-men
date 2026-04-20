@@ -10,8 +10,6 @@ var hu_speech_queue = ["wassup","why can't i see my peen :(","christ=lord","trig
 var hu_stuff = {}
 var food_count = 4
 
-var stuff_count = 0
-
 var vend_stuff = {}
 
 #0 is bad, 1 is good
@@ -23,6 +21,7 @@ var day = 0
 var prev_login = 0
 
 var grabbed = null
+var stuff_count = 0
 
 func change_scene(scene):
 	get_tree().change_scene_to_file(scene)

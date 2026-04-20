@@ -11,6 +11,14 @@ func _process(delta: float) -> void:
 		position = get_global_mouse_position();
 
 
+func find_grab_target(node: Node) -> Node:
+	var current = node
+	while current != null:
+		if current.is_in_group("grabbable"):
+			return current
+		current = current.get_parent()
+	return null
+
 func get_absolute_z_index(node: CanvasItem) -> int:
 	var z = node.z_index
 	if node.z_as_relative:
@@ -43,7 +51,7 @@ func get_node_under_mouse():
 
 	if top_collider:
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-			Controller.grabbed = top_collider.name
+			Controller.grabbed = find_grab_target(top_collider)
 			texture = godpinchl
 		else:
 			Controller.grabbed = null

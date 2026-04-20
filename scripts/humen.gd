@@ -5,10 +5,12 @@ var timer = 1.0
 @export var bounds_min := Vector2(60, 300)
 @export var bounds_max := Vector2(660, 520)
 func _ready() -> void:
+	add_to_group("grabbable")
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 func _physics_process(delta: float) -> void:
-	if Controller.grabbed == "HumanHead":
+	print(Controller.grabbed)
+	if Controller.grabbed == self:
 		var mouse_pos = get_global_mouse_position()
 		
 		position = mouse_pos  - Vector2(0,-160)

@@ -9,24 +9,17 @@ var prefab_scene: PackedScene = null
 var out = true
 
 func _ready():
-	
-	# Load the prefab scene from file
-	prefab_scene = load(prefab_path)  # Load the scene from the file path
-
-	# Check if the scene loaded correctly
-	if prefab_scene == null:
-		print("Failed to load prefab scene!")
-	else:
-		print("Prefab loaded successfully!")
+	add_to_group("grabbable")
+	prefab_scene = load(prefab_path)
 
 func _physics_process(delta: float) -> void:
-	if Controller.grabbed == "FoodButton":
+	if Controller.grabbed == self:
 		get_parent().texture = pressed_texture
 		if Controller.food_count > 0 and out:
 			Controller.food_count -= 1;
 			spawn_prefab()
 			out = false
-	elif Controller.grabbed == "":
+	elif Controller.grabbed == null:
 		get_parent().texture = normal_texture
 		out = true
 		

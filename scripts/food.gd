@@ -5,8 +5,10 @@ extends Sprite2D
 
 @export var duration := 1.0
 var elapsed := 0.0
+var touch = false
 
 func _ready():
+	add_to_group("grabbable")
 	scale = Vector2(0.1, 0.1)
 
 func _process(delta):
@@ -14,11 +16,12 @@ func _process(delta):
 		elapsed += delta
 		var t = clamp(elapsed / duration, 0.0, 1.0)
 		scale = Vector2.ONE * lerp(0.1, 1.0, t)
-	elif Controller.grabbed == get_child(0).name:
-		z_index = 10
+	elif Controller.grabbed == self:
+		touch = true
+		z_index = 15
 		var mouse_pos = get_global_mouse_position()
 		position = mouse_pos - Vector2(1, 10)
 		position.x = clamp(position.x, bounds_min.x, bounds_max.x)
 		position.y = clamp(position.y, bounds_min.y, bounds_max.y)
-	else:
+	elif touch:
 		z_index = 0
