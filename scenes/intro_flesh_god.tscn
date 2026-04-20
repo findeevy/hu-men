@@ -185,7 +185,6 @@ stop_time = 10
 move = Vector2i(300, 0)
 
 [node name="Label" type="Label" parent="." unique_id=1376221764]
-visible = false
 offset_right = 713.0
 offset_bottom = 538.0
 theme = ExtResource("15_16rk2")

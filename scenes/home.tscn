@@ -150,6 +150,7 @@ size = Vector2(114, 514.5)
 radius = 17.31
 
 [node name="Node2D" type="Node2D" unique_id=1051605538]
+y_sort_enabled = true
 
 [node name="Wall" type="Sprite2D" parent="." unique_id=633169718]
 z_index = -10
@@ -159,49 +160,49 @@ texture = ExtResource("2_gi00y")
 centered = false
 
 [node name="UiFleshFrame0r" type="Sprite2D" parent="." unique_id=1701077042]
-z_index = 10
+z_index = 8
 material = SubResource("ShaderMaterial_5m3h6")
 position = Vector2(681.00006, 294.00003)
 rotation = -0.237365
 texture = ExtResource("4_aish6")
 
 [node name="UiFlesh1l" type="Sprite2D" parent="." unique_id=1296404224]
-z_index = 10
+z_index = 8
 material = SubResource("ShaderMaterial_ld15c")
-position = Vector2(358, 523)
+position = Vector2(398, 523)
 rotation = -1.5708
 texture = ExtResource("7_ppa51")
 
 [node name="UiFlesh1r" type="Sprite2D" parent="." unique_id=1640825819]
-z_index = 10
+z_index = 8
 material = SubResource("ShaderMaterial_0viod")
-position = Vector2(384, 108)
+position = Vector2(368, 108)
 rotation = -1.5708
 texture = ExtResource("8_kc6b6")
 
 [node name="UiFlesh2l" type="Sprite2D" parent="." unique_id=2083986188]
-z_index = 10
+z_index = 8
 material = SubResource("ShaderMaterial_jljx3")
 position = Vector2(48.99998, 271.00003)
 rotation = 0.0959931
 texture = ExtResource("9_jdxxw")
 
 [node name="UiFleshFrame0l" type="Sprite2D" parent="." unique_id=2101449461]
-z_index = 10
+z_index = 8
 material = SubResource("ShaderMaterial_gd8l3")
 position = Vector2(90, 64)
 rotation = 0.7382742
 texture = ExtResource("6_e42qu")
 
 [node name="UiFlesh2r" type="Sprite2D" parent="." unique_id=1818722124]
-z_index = 10
+z_index = 8
 material = SubResource("ShaderMaterial_bgtlw")
 position = Vector2(635.99994, 262.99994)
 rotation = 0.0959931
 texture = ExtResource("10_6k6s7")
 
 [node name="UiFlesh2r2" type="Sprite2D" parent="." unique_id=1019953827]
-z_index = 10
+z_index = 9
 material = SubResource("ShaderMaterial_bgtlw")
 position = Vector2(63.999985, 417)
 rotation = 2.5359633
@@ -228,6 +229,7 @@ current = true
 
 [node name="humen" type="Node2D" parent="." unique_id=359190]
 z_as_relative = false
+y_sort_enabled = true
 position = Vector2(320, 469)
 script = ExtResource("10_rpgsi")
 
@@ -289,11 +291,13 @@ script = ExtResource("17_o7pnx")
 rotation_speed = 4.6
 
 [node name="RightArm" type="Sprite2D" parent="humen" unique_id=1600705824]
+z_index = 1
 position = Vector2(43.999992, -117.000046)
 rotation = 0.9302605
 texture = ExtResource("13_o7pnx")
 
 [node name="LeftArm" type="Sprite2D" parent="humen" unique_id=201881520]
+z_index = 1
 position = Vector2(-47, -118)
 rotation = -0.78016216
 texture = ExtResource("13_o7pnx")
@@ -327,6 +331,7 @@ theme = ExtResource("11_rqor2")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "we love joe biden we love vaccines we love the antichrist oh yeah we are democrats yep yep! Penis for everyone!"
 autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="Nightoverlay" type="Sprite2D" parent="." unique_id=845201993]
 visible = false
@@ -344,7 +349,7 @@ offset = Vector2(-34, -50)
 script = ExtResource("21_ppa51")
 
 [node name="UiFleshWall" type="Sprite2D" parent="." unique_id=173569844]
-z_index = 10
+z_index = 9
 z_as_relative = false
 material = SubResource("ShaderMaterial_qmde4")
 position = Vector2(622, 0)

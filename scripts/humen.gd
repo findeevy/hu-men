@@ -19,8 +19,6 @@ func _physics_process(delta: float) -> void:
 		position.x = clamp(position.x, bounds_min.x, bounds_max.x)
 		position.y = clamp(position.y, bounds_min.y, bounds_max.y)
 		
-		return
-		
 	if Controller.hu_type == "wander":
 
 		if Controller.hu_mode == "right":

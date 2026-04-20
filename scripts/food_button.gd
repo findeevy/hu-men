@@ -30,6 +30,4 @@ func spawn_prefab():
 		get_tree().current_scene.add_child(instance)
 		instance.global_position = (global_position - Vector2(40,10))
 		instance.z_as_relative = false
-		instance.get_child(0).name = instance.name + str(Controller.stuff_count)
-		Controller.stuff_count += 1
 		instance.z_index = 20

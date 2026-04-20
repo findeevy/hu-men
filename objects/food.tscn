@@ -7,12 +7,15 @@
 radius = 37.93
 
 [node name="Apple" type="Sprite2D" unique_id=1781404453]
-z_index = 14
+z_index = 10
 z_as_relative = false
+y_sort_enabled = true
 texture = ExtResource("1_hwnna")
 script = ExtResource("2_5nx56")
 
 [node name="Food" type="Area2D" parent="." unique_id=183235440]
+y_sort_enabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Food" unique_id=2097028987]
+y_sort_enabled = true
 shape = SubResource("CircleShape2D_sh163")

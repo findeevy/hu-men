@@ -49,17 +49,21 @@ func get_node_under_mouse():
 				top_z = effective_z
 				top_collider = c
 
-	if top_collider:
-		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-			Controller.grabbed = find_grab_target(top_collider)
-			texture = godpinchl
-		else:
-			Controller.grabbed = null
-			texture = godhandl
-	else:
+	var holding = Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
+
+	if not holding:
+		# Mouse released — always drop whatever we had
 		Controller.grabbed = null
-		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-			texture = godpinch
+		if top_collider:
+			texture = godhandl
 		else:
 			texture = godhand
+	else:
+		# Mouse held — only pick something up if we aren't already holding anything
+		if Controller.grabbed == null and top_collider:
+			Controller.grabbed = find_grab_target(top_collider)
+		if top_collider or Controller.grabbed != null:
+			texture = godpinchl
+		else:
+			texture = godpinch
 	
