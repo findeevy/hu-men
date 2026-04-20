@@ -26,7 +26,12 @@
 [ext_resource type="Texture2D" uid="uid://bnbxt8rg68wg0" path="res://textures/ui/speech_bubble.png" id="22_kc6b6"]
 [ext_resource type="Texture2D" uid="uid://cspx77tdo87xt" path="res://textures/ui/ui_flesh_wall.png" id="25_rqor2"]
 [ext_resource type="Script" uid="uid://dol80q3egruic" path="res://scripts/ui_flesh_wall.gd" id="26_qmde4"]
+[ext_resource type="Texture2D" uid="uid://max828edtidj" path="res://textures/ui/fleshdark.png" id="27_vysw7"]
 [ext_resource type="Texture2D" uid="uid://dlfbrtbm7e2ik" path="res://textures/ui/vending_machine_0.png" id="27_wa7t7"]
+[ext_resource type="Texture2D" uid="uid://b5he1hnddbvw6" path="res://textures/ui/fleshplatform.png" id="29_miq5y"]
+[ext_resource type="Script" uid="uid://bf07se1porfh4" path="res://scripts/food_count.gd" id="31_okf6m"]
+[ext_resource type="Texture2D" uid="uid://b06dgjql8h6rs" path="res://textures/ui/vending_button_up.png" id="31_sh163"]
+[ext_resource type="Script" uid="uid://cvw32qd8gsmp7" path="res://scripts/food_button.gd" id="32_okf6m"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5m3h6"]
 shader = ExtResource("3_o7pnx")
@@ -141,6 +146,9 @@ shader_parameter/vertical_intensity = 1.2
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rqor2"]
 size = Vector2(114, 514.5)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_sh163"]
+radius = 17.31
+
 [node name="Node2D" type="Node2D" unique_id=1051605538]
 
 [node name="Wall" type="Sprite2D" parent="." unique_id=633169718]
@@ -188,7 +196,7 @@ texture = ExtResource("6_e42qu")
 [node name="UiFlesh2r" type="Sprite2D" parent="." unique_id=1818722124]
 z_index = 10
 material = SubResource("ShaderMaterial_bgtlw")
-position = Vector2(651.99994, 262.99994)
+position = Vector2(635.99994, 262.99994)
 rotation = 0.0959931
 texture = ExtResource("10_6k6s7")
 
@@ -328,7 +336,7 @@ position = Vector2(348, 257)
 texture = ExtResource("19_snnha")
 
 [node name="Godhand" type="Sprite2D" parent="." unique_id=1242562243]
-z_index = 13
+z_index = 25
 position = Vector2(445, 267)
 texture = ExtResource("20_e42qu")
 centered = false
@@ -336,7 +344,7 @@ offset = Vector2(-34, -50)
 script = ExtResource("21_ppa51")
 
 [node name="UiFleshWall" type="Sprite2D" parent="." unique_id=173569844]
-z_index = 12
+z_index = 10
 z_as_relative = false
 material = SubResource("ShaderMaterial_qmde4")
 position = Vector2(622, 0)
@@ -345,33 +353,46 @@ centered = false
 script = ExtResource("26_qmde4")
 
 [node name="FleshWalls" type="Area2D" parent="UiFleshWall" unique_id=1755496589]
-z_index = 11
-z_as_relative = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="UiFleshWall/FleshWalls" unique_id=2002139658]
 position = Vector2(68, 262.75)
 shape = SubResource("RectangleShape2D_rqor2")
 
-[node name="VendingMachine0" type="Sprite2D" parent="UiFleshWall" unique_id=258704786]
-position = Vector2(215, 112)
-texture = ExtResource("27_wa7t7")
-
-[node name="VendingMachine1" type="Sprite2D" parent="UiFleshWall" unique_id=2043934592]
-position = Vector2(367, 112)
-texture = ExtResource("27_wa7t7")
-
-[node name="VendingMachine2" type="Sprite2D" parent="UiFleshWall" unique_id=273317405]
-position = Vector2(519, 112)
-texture = ExtResource("27_wa7t7")
+[node name="Fleshdark" type="Sprite2D" parent="UiFleshWall" unique_id=925187891]
+position = Vector2(535, 268)
+texture = ExtResource("27_vysw7")
 
 [node name="VendingMachine3" type="Sprite2D" parent="UiFleshWall" unique_id=1014882440]
-position = Vector2(215, 312)
+position = Vector2(215, 341)
 texture = ExtResource("27_wa7t7")
 
-[node name="VendingMachine4" type="Sprite2D" parent="UiFleshWall" unique_id=1395545496]
-position = Vector2(367, 312)
-texture = ExtResource("27_wa7t7")
+[node name="FoodButto" type="Sprite2D" parent="UiFleshWall/VendingMachine3" unique_id=1409025248]
+position = Vector2(40, 55)
+texture = ExtResource("31_sh163")
 
-[node name="VendingMachine5" type="Sprite2D" parent="UiFleshWall" unique_id=388945715]
-position = Vector2(519, 312)
-texture = ExtResource("27_wa7t7")
+[node name="FoodButton" type="Area2D" parent="UiFleshWall/VendingMachine3/FoodButto" unique_id=1376964036]
+script = ExtResource("32_okf6m")
+
+[node name="buttsoha" type="CollisionShape2D" parent="UiFleshWall/VendingMachine3/FoodButto/FoodButton" unique_id=353741486]
+shape = SubResource("CircleShape2D_sh163")
+
+[node name="Label2" type="Label" parent="UiFleshWall/VendingMachine3" unique_id=2084157623]
+offset_left = -38.0
+offset_top = 9.0
+offset_right = -8.0
+offset_bottom = 31.0
+theme = ExtResource("11_rqor2")
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_constants/paragraph_spacing = -3
+text = "food
+9 lft"
+autowrap_mode = 2
+script = ExtResource("31_okf6m")
+
+[node name="Fleshplatform" type="Sprite2D" parent="UiFleshWall" unique_id=1605393337]
+position = Vector2(282, 435)
+texture = ExtResource("29_miq5y")
+
+[node name="Fleshplatform2" type="Sprite2D" parent="UiFleshWall" unique_id=1467877407]
+position = Vector2(282, 221)
+texture = ExtResource("29_miq5y")

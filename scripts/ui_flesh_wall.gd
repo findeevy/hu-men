@@ -13,7 +13,7 @@ func _ready():
 	snap_target = origin_x
 
 
-func _process(delta):
+func _physics_process(delta: float) -> void:
 	if Controller.grabbed == "FleshWalls":
 		if !dragging:
 			dragging = true
@@ -27,11 +27,11 @@ func _process(delta):
 			dragging = false
 			
 			# Decide snap target based on midpoint between 622 and 0
-			var midpoint = origin_x / 2.0  # 311
+			var midpoint = origin_x / 1.5
 			
 			if position.x > midpoint:
-				snap_target = origin_x   # 622
+				snap_target = origin_x
 			else:
-				snap_target = 0.0        # 0
+				snap_target = 150     # 0
 		
 		position.x = lerp(position.x, snap_target, snap_speed * delta)

@@ -11,6 +11,14 @@ func _process(delta: float) -> void:
 		position = get_global_mouse_position();
 
 
+func get_absolute_z_index(node: CanvasItem) -> int:
+	var z = node.z_index
+	if node.z_as_relative:
+		var parent = node.get_parent()
+		if parent is CanvasItem:
+			z += get_absolute_z_index(parent)
+	return z
+
 func get_node_under_mouse():
 	var space_state = get_world_2d().direct_space_state
 	var mouse_pos = get_global_mouse_position()
@@ -28,10 +36,9 @@ func get_node_under_mouse():
 	for r in results:
 		var c = r.collider
 		if c is CanvasItem:
-			print(str(c.z_index) +":")
-			print(c.name)
-			if c.z_index > top_z:
-				top_z = c.z_index
+			var effective_z = get_absolute_z_index(c)
+			if effective_z > top_z:
+				top_z = effective_z
 				top_collider = c
 
 	if top_collider:
@@ -39,10 +46,10 @@ func get_node_under_mouse():
 			Controller.grabbed = top_collider.name
 			texture = godpinchl
 		else:
-			Controller.grabbed = ""
+			Controller.grabbed = null
 			texture = godhandl
 	else:
-		Controller.grabbed = ""
+		Controller.grabbed = null
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 			texture = godpinch
 		else:
