@@ -18,8 +18,24 @@ func _physics_process(delta: float) -> void:
 		# clamp to bounds
 		position.x = clamp(position.x, bounds_min.x, bounds_max.x)
 		position.y = clamp(position.y, bounds_min.y, bounds_max.y)
+	elif Controller.hu_type == "chase":
+		var closest_food = null
+		var closest_dist = INF
 		
-	if Controller.hu_type == "wander":
+		for key in Controller.hu_stuff.keys():
+			if "Food" in key:
+				var food = Controller.hu_stuff[key]
+				if food: # make sure it exists
+					var dist = position.distance_to(food.position)
+					if dist < closest_dist:
+						closest_dist = dist
+						closest_food = food
+		
+		if closest_food:
+			var dir = (closest_food.position - position).normalized()
+			var speed = 100 # tweak this
+			position += dir * speed * delta
+	elif Controller.hu_type == "wander":
 
 		if Controller.hu_mode == "right":
 			position.x += 1

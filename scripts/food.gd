@@ -9,6 +9,9 @@ var touch = false
 
 func _ready():
 	add_to_group("grabbable")
+	Controller.hu_stuff["chin" + name + str(Controller.stuff_count)] = self
+	print("chin" + name + str(Controller.stuff_count))
+	Controller.stuff_count += 1
 	scale = Vector2(0.1, 0.1)
 
 func _process(delta):

@@ -6,7 +6,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_sh163"]
 radius = 37.93
 
-[node name="Apple" type="Sprite2D" unique_id=1781404453]
+[node name="FoodSprite" type="Sprite2D" unique_id=1781404453]
 z_index = 10
 z_as_relative = false
 y_sort_enabled = true
