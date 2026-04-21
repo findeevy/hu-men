@@ -136,6 +136,10 @@ shader_parameter/intensity = 0.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_6k6s7"]
 radius = 37.93
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_okf6m"]
+radius = 39.0
+height = 78.0
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qmde4"]
 shader = ExtResource("3_o7pnx")
 shader_parameter/sway_amount = 10.0
@@ -227,7 +231,7 @@ metadata/_edit_use_anchors_ = true
 [node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=917583079]
 current = true
 
-[node name="humen" type="Node2D" parent="." unique_id=359190]
+[node name="humen" type="CharacterBody2D" parent="." unique_id=1875271573]
 z_as_relative = false
 y_sort_enabled = true
 position = Vector2(320, 469)
@@ -294,6 +298,7 @@ rotation_speed = 4.6
 z_index = 1
 position = Vector2(43.999992, -117.000046)
 rotation = 0.9302605
+scale = Vector2(0.99999994, 0.99999994)
 texture = ExtResource("13_o7pnx")
 
 [node name="LeftArm" type="Sprite2D" parent="humen" unique_id=201881520]
@@ -332,6 +337,10 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "system"
 autowrap_mode = 2
 metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="humen" unique_id=1919211471]
+position = Vector2(-2, -21)
+shape = SubResource("CapsuleShape2D_okf6m")
 
 [node name="Nightoverlay" type="Sprite2D" parent="." unique_id=845201993]
 visible = false

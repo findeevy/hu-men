@@ -1,14 +1,17 @@
-extends Node2D
+extends CharacterBody2D
 
 var wanderTimer = 1.0
 var modeTimer = 10.0
 
 @export var bounds_min := Vector2(60, 300)
 @export var bounds_max := Vector2(660, 520)
+
+var speed := 100
+
 func _ready() -> void:
 	add_to_group("grabbable")
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	
+
 func modeTracker(delta: float) -> void:
 	modeTimer -= delta
 	if modeTimer <= 0:
@@ -17,55 +20,65 @@ func modeTracker(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	modeTracker(delta)
-	print(Controller.grabbed)
+
 	if Controller.grabbed == self:
 		var mouse_pos = get_global_mouse_position()
-		
-		position = mouse_pos  - Vector2(0,-160)
-		
-		# clamp to bounds
-		position.x = clamp(position.x, bounds_min.x, bounds_max.x)
-		position.y = clamp(position.y, bounds_min.y, bounds_max.y)
-	elif Controller.hu_type == "chase":
+		var target = mouse_pos - Vector2(0, -160)
+
+		# Move toward mouse using velocity (keeps collision)
+		velocity = (target - global_position) * 10
+	else:
+		handle_ai(delta)
+
+	move_and_slide()
+
+	# Clamp AFTER movement so collisions still happen
+	global_position.x = clamp(global_position.x, bounds_min.x, bounds_max.x)
+	global_position.y = clamp(global_position.y, bounds_min.y, bounds_max.y)
+
+
+func handle_ai(delta: float) -> void:
+	if Controller.hu_type == "chase":
 		var closest_food = null
 		var closest_dist = INF
 		
 		for key in Controller.hu_stuff.keys():
 			if "Food" in key:
 				var food = Controller.hu_stuff[key]
-				if food: # make sure it exists
-					var dist = position.distance_to(food.position)
+				if food:
+					var dist = global_position.distance_to(food.global_position)
 					if dist < closest_dist:
 						closest_dist = dist
 						closest_food = food
 		
 		if closest_food:
-			var dir = (closest_food.position - position).normalized()
-			var speed = 100 # tweak this
-			position += dir * speed * delta
+			var dir = (closest_food.global_position - global_position).normalized()
+			velocity = dir * speed
+		else:
+			Controller.hu_type = "wander"
+
 	elif Controller.hu_type == "wander":
+		var dir := Vector2.ZERO
 
 		if Controller.hu_mode == "right":
-			position.x += 1
+			dir.x += 1
 		elif Controller.hu_mode == "left":
-			position.x -= 1
+			dir.x -= 1
 		elif Controller.hu_mode == "up":
-			position.y -= 1
+			dir.y -= 1
 		elif Controller.hu_mode == "down":
-			position.y += 1
+			dir.y += 1
 
-		# bounds
-		if position.y > bounds_max.y:
-			wanderTimer = randf_range(2.0, 4.0)
+		velocity = dir.normalized() * speed
+
+		# bounds reaction
+		if global_position.y > bounds_max.y:
 			Controller.hu_mode = "up"
-		if position.y < bounds_min.y:
-			wanderTimer = randf_range(2.0, 4.0)
+		elif global_position.y < bounds_min.y:
 			Controller.hu_mode = "down"
-		if position.x < bounds_min.x:
-			wanderTimer = randf_range(2.0, 4.0)
+		elif global_position.x < bounds_min.x:
 			Controller.hu_mode = "right"
-		if position.x > bounds_max.x:
-			wanderTimer = randf_range(2.0, 4.0)
+		elif global_position.x > bounds_max.x:
 			Controller.hu_mode = "left"
 
 		wanderTimer -= delta
