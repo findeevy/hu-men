@@ -329,7 +329,7 @@ offset_right = 77.0
 offset_bottom = 34.0
 theme = ExtResource("11_rqor2")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "we love joe biden we love vaccines we love the antichrist oh yeah we are democrats yep yep! Penis for everyone!"
+text = "system"
 autowrap_mode = 2
 metadata/_edit_use_anchors_ = true
 

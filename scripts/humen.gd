@@ -1,14 +1,22 @@
 extends Node2D
 
-var timer = 1.0
+var wanderTimer = 1.0
+var modeTimer = 10.0
 
 @export var bounds_min := Vector2(60, 300)
 @export var bounds_max := Vector2(660, 520)
 func _ready() -> void:
 	add_to_group("grabbable")
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	
+func modeTracker(delta: float) -> void:
+	modeTimer -= delta
+	if modeTimer <= 0:
+		Controller.hu_type = Controller.hu_types[randi_range(0, 1)]
+		modeTimer = randf_range(15, 30)
 
 func _physics_process(delta: float) -> void:
+	modeTracker(delta)
 	print(Controller.grabbed)
 	if Controller.grabbed == self:
 		var mouse_pos = get_global_mouse_position()
@@ -48,19 +56,19 @@ func _physics_process(delta: float) -> void:
 
 		# bounds
 		if position.y > bounds_max.y:
-			timer = randf_range(2.0, 4.0)
+			wanderTimer = randf_range(2.0, 4.0)
 			Controller.hu_mode = "up"
 		if position.y < bounds_min.y:
-			timer = randf_range(2.0, 4.0)
+			wanderTimer = randf_range(2.0, 4.0)
 			Controller.hu_mode = "down"
 		if position.x < bounds_min.x:
-			timer = randf_range(2.0, 4.0)
+			wanderTimer = randf_range(2.0, 4.0)
 			Controller.hu_mode = "right"
 		if position.x > bounds_max.x:
-			timer = randf_range(2.0, 4.0)
+			wanderTimer = randf_range(2.0, 4.0)
 			Controller.hu_mode = "left"
 
-		timer -= delta
-		if timer < 0.0:
+		wanderTimer -= delta
+		if wanderTimer < 0.0:
 			Controller.hu_mode = Controller.hu_roam[randi_range(0, 4)]
-			timer = randf_range(0.5, 2.0)
+			wanderTimer = randf_range(0.5, 2.0)
