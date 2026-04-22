@@ -9,8 +9,19 @@ var touch = false
 
 func _ready():
 	add_to_group("grabbable")
-	Controller.hu_stuff["Food" + name + str(Controller.stuff_count)] = self
+	add_to_group("food")
+	
+	# Generate a unique name
+	var unique_name = "Food" + name + str(Controller.stuff_count)
+	name = unique_name
 	Controller.stuff_count += 1
+	
+	# Register in controller's food_dict with metadata
+	Controller.food_dict[unique_name] = {
+		"node": self,
+		"status": "alive"
+	}
+	
 	scale = Vector2(0.1, 0.1)
 
 func _process(delta):
@@ -27,3 +38,9 @@ func _process(delta):
 		position.y = clamp(position.y, bounds_min.y, bounds_max.y)
 	elif touch:
 		z_index = 0
+
+# Called when the human eats/grabs this food
+func get_eaten():
+	# Remove from dictionary
+	Controller.food_dict.erase(name)
+	queue_free()

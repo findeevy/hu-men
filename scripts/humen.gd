@@ -8,6 +8,10 @@ var modeTimer = 10.0
 
 var speed := 100
 
+# Tracking the currently targeted food
+var current_target_key: String = ""
+var current_target_node: Node2D = null
+
 func _ready() -> void:
 	add_to_group("grabbable")
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
@@ -24,8 +28,6 @@ func _physics_process(delta: float) -> void:
 	if Controller.grabbed == self:
 		var mouse_pos = get_global_mouse_position()
 		var target = mouse_pos - Vector2(0, -160)
-
-		# Move toward mouse using velocity (keeps collision)
 		velocity = (target - global_position) * 10
 	else:
 		handle_ai(delta)
@@ -41,28 +43,22 @@ func handle_ai(delta: float) -> void:
 		velocity = Vector2.ZERO
 		
 	elif Controller.hu_type == "chase":
-		var closest_food = null
-		var closest_dist = INF
+		# Ensure we have a valid target
+		if current_target_node == null or not is_instance_valid(current_target_node):
+			find_new_target()
 		
-		for key in Controller.hu_stuff.keys():
-			if "Food" in key:
-				var food = Controller.hu_stuff[key]
-				if food:
-					var dist = global_position.distance_to(food.global_position)
-					if dist < 10:
-						print("FOUND")
-						Controller.hu_type = "grab"
-						modeTimer = 30
-						break
-					elif dist < closest_dist:
-						closest_dist = dist
-						closest_food = food
-		
-		if closest_food:
-			var dir = (closest_food.global_position - global_position).normalized()
-			velocity = dir * speed
-		elif Controller.hu_type != "grab":
+		if current_target_node:
+			var dist = global_position.distance_to(current_target_node.global_position)
+			if dist < 10:
+				start_grabbing()
+			else:
+				var dir = (current_target_node.global_position - global_position).normalized()
+				velocity = dir * speed
+		else:
+			# No food left
 			Controller.hu_type = "wander"
+			current_target_key = ""
+			current_target_node = null
 
 	elif Controller.hu_type == "wander":
 		var dir := Vector2.ZERO
@@ -92,3 +88,52 @@ func handle_ai(delta: float) -> void:
 		if wanderTimer < 0.0:
 			Controller.hu_mode = Controller.hu_roam[randi_range(0, 4)]
 			wanderTimer = randf_range(0.5, 2.0)
+
+
+func find_new_target() -> void:
+	var closest_key = ""
+	var closest_node: Node2D = null
+	var closest_dist_sq = INF
+	
+	for food_name in Controller.food_dict.keys():
+		var entry = Controller.food_dict[food_name]
+		var food_node = entry["node"]
+		
+		# Skip if node is invalid (safety cleanup)
+		if not is_instance_valid(food_node):
+			Controller.food_dict.erase(food_name)
+			continue
+		
+		# Optional: only target "alive" food
+		if entry["status"] != "alive":
+			continue
+		
+		var d_sq = global_position.distance_squared_to(food_node.global_position)
+		if d_sq < closest_dist_sq:
+			closest_dist_sq = d_sq
+			closest_key = food_name
+			closest_node = food_node
+	
+	current_target_key = closest_key
+	current_target_node = closest_node
+
+
+func start_grabbing() -> void:
+	Controller.hu_type = "grab"
+	modeTimer = 30.0
+	# The actual consumption will happen when the arm finishes rotating
+
+
+# Called by the arm when a full rotation completes
+func _on_grab_complete() -> void:
+	if current_target_node and is_instance_valid(current_target_node):
+		# Change status to "eaten" (or just remove)
+		if current_target_key in Controller.food_dict:
+			Controller.food_dict[current_target_key]["status"] = "eaten"
+		# Tell the food to delete itself
+		if current_target_node.has_method("get_eaten"):
+			current_target_node.get_eaten()
+	
+	# Clear target
+	current_target_key = ""
+	current_target_node = null

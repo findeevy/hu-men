@@ -12,4 +12,9 @@ func _process(delta):
 		if abs(rotated_amount) >= 360:
 			rotation_degrees -= rotated_amount
 			rotated_amount = 0
+			
+			var human = get_parent()
+			if human.has_method("_on_grab_complete"):
+				human._on_grab_complete()
+			
 			Controller.hu_type = "wander"
