@@ -6,7 +6,7 @@ var next_uid = 0;
 
 var hu_type = "chase"
 
-var hu_types = ["wander", "chase", "grab", "speech", "poop"]
+var hu_types = ["chase", "chase", "grab", "speech", "poop"]
 var hu_mode = "still"
 var hu_roam = ["still","up", "down", "right","left"]
 var hu_speech_queue = ["wassup","why can't i see my peen :(","christ=lord","trigon collective"]

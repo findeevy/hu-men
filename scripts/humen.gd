@@ -31,14 +31,16 @@ func _physics_process(delta: float) -> void:
 		handle_ai(delta)
 
 	move_and_slide()
-
-	# Clamp AFTER movement so collisions still happen
+	
 	global_position.x = clamp(global_position.x, bounds_min.x, bounds_max.x)
 	global_position.y = clamp(global_position.y, bounds_min.y, bounds_max.y)
 
 
 func handle_ai(delta: float) -> void:
-	if Controller.hu_type == "chase":
+	if Controller.hu_type == "grab":
+		velocity = Vector2.ZERO
+		
+	elif Controller.hu_type == "chase":
 		var closest_food = null
 		var closest_dist = INF
 		
@@ -47,14 +49,19 @@ func handle_ai(delta: float) -> void:
 				var food = Controller.hu_stuff[key]
 				if food:
 					var dist = global_position.distance_to(food.global_position)
-					if dist < closest_dist:
+					if dist < 10:
+						print("FOUND")
+						Controller.hu_type = "grab"
+						modeTimer = 30
+						break
+					elif dist < closest_dist:
 						closest_dist = dist
 						closest_food = food
 		
 		if closest_food:
 			var dir = (closest_food.global_position - global_position).normalized()
 			velocity = dir * speed
-		else:
+		elif Controller.hu_type != "grab":
 			Controller.hu_type = "wander"
 
 	elif Controller.hu_type == "wander":
@@ -72,13 +79,13 @@ func handle_ai(delta: float) -> void:
 		velocity = dir.normalized() * speed
 
 		# bounds reaction
-		if global_position.y > bounds_max.y:
+		if global_position.y >= bounds_max.y:
 			Controller.hu_mode = "up"
-		elif global_position.y < bounds_min.y:
+		elif global_position.y <= bounds_min.y:
 			Controller.hu_mode = "down"
-		elif global_position.x < bounds_min.x:
+		elif global_position.x <= bounds_min.x:
 			Controller.hu_mode = "right"
-		elif global_position.x > bounds_max.x:
+		elif global_position.x >= bounds_max.x:
 			Controller.hu_mode = "left"
 
 		wanderTimer -= delta

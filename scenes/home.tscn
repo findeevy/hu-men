@@ -20,6 +20,7 @@
 [ext_resource type="Script" uid="uid://cp4t1nciuhf53" path="res://scripts/leg.gd" id="17_o7pnx"]
 [ext_resource type="Texture2D" uid="uid://jmora8vxe5pv" path="res://textures/body/eyehole.png" id="17_ppa51"]
 [ext_resource type="Texture2D" uid="uid://7dmux6pu16ob" path="res://textures/ui/speechdot.png" id="19_6k6s7"]
+[ext_resource type="Script" uid="uid://cw42htm5daq44" path="res://scripts/arm.gd" id="19_6k8sm"]
 [ext_resource type="Texture2D" uid="uid://cong4haw4m0ft" path="res://textures/home/nightoverlay.png" id="19_snnha"]
 [ext_resource type="Texture2D" uid="uid://bmn4uyu4avyr" path="res://textures/ui/godhand.png" id="20_e42qu"]
 [ext_resource type="Script" uid="uid://d2vlqcudmplib" path="res://scripts/godhand.gd" id="21_ppa51"]
@@ -296,16 +297,24 @@ rotation_speed = 4.6
 
 [node name="RightArm" type="Sprite2D" parent="humen" unique_id=1600705824]
 z_index = 1
-position = Vector2(43.999992, -117.000046)
+position = Vector2(28.555, -101.09)
 rotation = 0.9302605
 scale = Vector2(0.99999994, 0.99999994)
 texture = ExtResource("13_o7pnx")
+centered = false
+offset = Vector2(-9.365, -57.375)
+script = ExtResource("19_6k8sm")
 
-[node name="LeftArm" type="Sprite2D" parent="humen" unique_id=201881520]
+[node name="LeftArm" type="Sprite2D" parent="humen" unique_id=327284979]
 z_index = 1
-position = Vector2(-47, -118)
-rotation = -0.78016216
+position = Vector2(-37.445007, -99.09)
+rotation = -0.7784169
+scale = Vector2(0.99999994, 0.99999994)
 texture = ExtResource("13_o7pnx")
+centered = false
+offset = Vector2(-9.365, -57.375)
+script = ExtResource("19_6k8sm")
+rotation_speed = -360
 
 [node name="Speechdot2" type="Sprite2D" parent="humen" unique_id=1228719385]
 z_index = 7
